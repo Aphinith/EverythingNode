@@ -19,7 +19,8 @@ if (command === 'add') {
   if (note === 'duplicate') {
     console.log(`Could not add new note, the title ${argv.title} may already exist or is not a valid note.`);
   } else {
-    console.log(`The following has been added:\nTitle: ${note.title}\nBody: ${note.body}`);
+    console.log('Note added:');
+    notes.logNote(note);
   }
 } else if (command === 'list') {
   notes.getAll();
@@ -27,7 +28,8 @@ if (command === 'add') {
   var note = notes.getNote(argv.title);
 
   if (note) {
-    console.log(`Title: ${note.title} \nBody: ${note.body}`);
+    console.log('Note found:');
+    notes.logNote(note);
   } else {
     console.log(`${argv.title} does not exist in list.`);
   }
