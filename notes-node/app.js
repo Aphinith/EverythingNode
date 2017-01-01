@@ -15,13 +15,19 @@ var command = argv._[0];
 console.log('command: ', command);
 
 if (command === 'add') {
-  notes.addNote(argv.title, argv.body);
+  var note = notes.addNote(argv.title, argv.body);
+  if (note === 'duplicate') {
+    console.log(`Could not add new note, the title ${argv.title} may already exist or is not a valid note.`);
+  } else {
+    console.log(`The following has been added:\nTitle: ${note.title}\nBody: ${note.body}`);
+  }
 } else if (command === 'list') {
   notes.getAll();
 } else if (command === 'read') {
   notes.getNote(argv.title);
 } else if (command === 'remove') {
-  notes.removeNote(argv.title);
+  var note = notes.removeNote(argv.title);
+  console.log(note);
 } else {
   console.log('Command not found!');
 };
