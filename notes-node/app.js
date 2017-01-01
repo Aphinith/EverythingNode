@@ -24,7 +24,13 @@ if (command === 'add') {
 } else if (command === 'list') {
   notes.getAll();
 } else if (command === 'read') {
-  notes.getNote(argv.title);
+  var note = notes.getNote(argv.title);
+
+  if (note) {
+    console.log(`Title: ${note.title} \nBody: ${note.body}`);
+  } else {
+    console.log(`${argv.title} does not exist in list.`);
+  }
 } else if (command === 'remove') {
   var note = notes.removeNote(argv.title);
   console.log(note);
