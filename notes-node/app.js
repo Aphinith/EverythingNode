@@ -1,8 +1,27 @@
-console.log('starting app.');
+console.log('starting app.js');
 
 const fs = require('fs');
-const os = require('os');
+const _ = require('lodash');
+const yargs = require('yargs');
+const notes = require('./notes.js');
 
-var user = os.userInfo();
+const argv = yargs.argv;
 
-fs.appendFile('greetings.txt', `Hello ${user.username}!`);
+
+// console.log('Process: ', process.argv);
+// console.log('Yargs: ', argv);
+
+var command = process.argv[2];
+console.log('command: ', command);
+
+if (command === 'add') {
+  notes.addNote(argv.title, argv.body);
+} else if (command === 'list') {
+  notes.getAll();
+} else if (command === 'read') {
+  notes.getNote(argv.title);
+} else if (command === 'remove') {
+  notes.removeNote(argv.title);
+} else {
+  console.log('Command not found!');
+};
