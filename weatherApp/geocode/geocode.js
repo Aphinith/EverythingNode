@@ -1,6 +1,6 @@
 const request = require('request');
 
-function geocodeAddress(location) {
+function geocodeAddress(location, callback) {
   let address = encodeURI(location);
 
   request({
@@ -8,14 +8,16 @@ function geocodeAddress(location) {
     json: true
   }, (error, response, body) => {
     if (error) {
-      console.log('Unable to connect to Google Services.');
+      callback('Unable to connect to Google Servers.');
     } else if (body.status === 'ZERO_RESULTS') {
       console.log('Unable to find that address.');
     } else if (body.status === 'OK') {  
-      console.log(`Address: ${body.results[0].formatted_address}`);
-      console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
-      console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
-    };
+      callback(undefined, {
+        address: body.results[0].formatted_address,
+        lat: body.results[0].geometry.location.lat,
+        lng: body.results[0].geometry.location.lng
+      });
+    }
   });
 };
 
