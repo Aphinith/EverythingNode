@@ -25,11 +25,11 @@ geocode.geocodeAddress(argv.a, (errorMessage, results) => {
         lat: results.lat, 
         lng: results.lng
       };
-    getTemp.getTemp(coordinates, (errorMesage, results) => {
+    getTemp.getTemp(coordinates, (errorMesage, weatherResults) => {
       if (errorMessage) {
         console.log(errorMessage);
       } else {
-        console.log('Temperature is: ', results);
+        console.log('Temperature is: ', weatherResults);
       }
     });
   };
