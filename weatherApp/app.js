@@ -29,11 +29,11 @@ geocode.geocodeAddress(argv.a, (errorMessage, results) => {
       url: `https://api.darksky.net/forecast/${KEY}/${lat},${lng}`,
       json: true
     }, (error, response, body) => {
-      if (error) {
-        console.log('Could not connect with darksky');
+      if (!error and response.statusCode === 200) {
+        console.log(body.currently.temperature);
       } else {
-        console.log('body: ', body.currently);
-      };
+        console.log('error, could not connect to darksky.');
+      }
     })
   };
 });
