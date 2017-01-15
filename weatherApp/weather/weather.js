@@ -10,9 +10,9 @@ const getTemp = function(coordinates, callback) {
     json: true
   }, (error, response, body) => {
     if (!error && response.statusCode === 200) {
-      console.log(body.currently.temperature);
+      callback(undefined, body.currently.temperature);
     } else {
-      console.log('error, could not connect to darksky.');
+      callback('error, could not connect to darksky.');
     }
   })
 }

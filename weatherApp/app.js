@@ -25,7 +25,13 @@ geocode.geocodeAddress(argv.a, (errorMessage, results) => {
         lat: results.lat, 
         lng: results.lng
       };
-    getTemp.getTemp(coordinates);
+    getTemp.getTemp(coordinates, (errorMesage, results) => {
+      if (errorMessage) {
+        console.log(errorMessage);
+      } else {
+        console.log('Temperature is: ', results);
+      }
+    });
   };
 });
 
