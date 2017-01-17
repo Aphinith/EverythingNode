@@ -11,7 +11,7 @@ var geocode = (address) => {
       if (error) {
         reject('Could not connect to GoogleMapsAPI');
       } else if (body.status === 'ZERO_RESULTS') {
-        resolve('zero results!!!!!');
+        reject('zero results!!!!!');
       } else if (body.status === 'OK') {
         console.log('success');
         resolve({
